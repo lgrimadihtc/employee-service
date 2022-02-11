@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.htc.microservices.employee.entities.Employee;
+import com.htc.microservices.employee.exception.EmployeeNotFoundException;
 import com.htc.microservices.employee.repository.EmployeeRepository;
 
 @Service
@@ -21,8 +22,9 @@ public class EmployeeService {
 	}
 
 	public Employee findById(Integer id) {
+	
 
-		return this.repository.findById(id).get();
+		return this.repository.findById(id).orElseThrow(()-> new EmployeeNotFoundException("Empleado no existente "));
 	}
 
 	public Employee save(Employee employee) {
