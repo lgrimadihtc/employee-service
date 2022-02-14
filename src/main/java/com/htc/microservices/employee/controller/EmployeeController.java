@@ -2,6 +2,8 @@ package com.htc.microservices.employee.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +28,7 @@ public class EmployeeController {
 	}
 
 	@PostMapping("/employees")
-	public Employee save(@RequestBody Employee employee) {
+	public Employee save(@Valid @RequestBody Employee employee) {
 		return this.service.save(employee);
 	}
 
@@ -39,6 +41,7 @@ public class EmployeeController {
 	@GetMapping("/employees/{id}")
 	public Employee update(@PathVariable("id") Integer id) {
 		return this.service.findById(id);
+		
 	}
 
 	@DeleteMapping("/employees/{id}")
